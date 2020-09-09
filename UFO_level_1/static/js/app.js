@@ -36,18 +36,24 @@ function runEnter() {
     var inputValue = inputElement.property("value");
     console.log(inputValue);
     
-    var filteredData = tableData.filter(ufo => ufo.datetime === inputValue);
-    console.log(filteredData);
+    //conditional to check input value
+    if (filteredData.length >= 1) {   
+        var filteredData = tableData.filter(ufo => ufo.datetime === inputValue);
+        console.log(filteredData);
 
-    //create an array of filtered UFO sightings
-    filteredData.forEach(function(filteredUFO) {
-        var tbody = d3.select("tbody");
-        console.log(filteredUFO);
-        var row = tbody.append("tr");
-        Object.entries(filteredUFO).forEach(function([key, value]) {
-            console.log(key, value);
-            var cell = row.append("td");
-            cell.text(value);
+        //create an array of filtered UFO sightings
+        filteredData.forEach(function(filteredUFO) {
+            var tbody = d3.select("tbody");
+            console.log(filteredUFO);
+            var row = tbody.append("tr");
+            Object.entries(filteredUFO).forEach(function([key, value]) {
+                console.log(key, value);
+                var cell = row.append("td");
+                cell.text(value);
+            });
         });
-    });
+    }
+    else{
+        alert("No results found")
+    }
 }
