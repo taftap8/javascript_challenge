@@ -27,20 +27,29 @@ form.on("submit", runEnter);
 //complete event handler for form completion
 function runEnter() {
     var ufoTable = d3.select("tbody");
-    ufoTable.html("");
+    
     //prevent page from refreshing
     d3.event.preventDefault();
-    //select input elemtent
-    var inputElement = d3.select("#datetime");
+
+    //select input elements
+    var dateinputElement = d3.select("#datetime");
+    var cityinputElement = d3.select("#city");
+    var stateinputElement = d3.select("#state");
+    var countryinputElement = d3.select("#country");
+
     //get the value property
-    var inputValue = inputElement.property("value");
-    console.log(inputValue);
-    
+    var dateinputValue = dateinputElement.property("value");
+    var cityinputValue = cityinputElement.property("value");
+    var stateinputValue = stateinputElement.property("value");
+    var countryinputValue = countryinputElement.property("value");
+
     //conditional to check input value
     
     var filteredData = tableData.filter(ufo => ufo.datetime === inputValue);
     console.log(filteredData);
 
+    //clear current table
+    ufoTable.html("");
     //create an array of filtered UFO sightings
     filteredData.forEach(function(filteredUFO) {
         var tbody = d3.select("tbody");

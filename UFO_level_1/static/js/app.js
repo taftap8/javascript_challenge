@@ -23,7 +23,7 @@ tableData.forEach(function(UFOData) {
 
 //create event handlers
 button.on("click", runEnter);
-form.on("submit", runEnter);
+form.on("change", runEnter);
 //complete event handler for form completion
 function runEnter() {
     var ufoTable = d3.select("tbody");
@@ -37,7 +37,7 @@ function runEnter() {
     console.log(inputValue);
     
     //conditional to check input value
-    if (filteredData.length >= 1) {   
+    if (inputValue.length != 0) {   
         var filteredData = tableData.filter(ufo => ufo.datetime === inputValue);
         console.log(filteredData);
 
@@ -52,7 +52,7 @@ function runEnter() {
                 cell.text(value);
             });
         });
-    }
+    }    
     else{
         alert("No results found")
     }
