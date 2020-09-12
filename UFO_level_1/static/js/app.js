@@ -34,13 +34,13 @@ function runEnter() {
     var inputElement = d3.select("#datetime");
     //get the value property
     var inputValue = inputElement.property("value");
-    console.log(inputValue);
+    console.log(inputValue.length);
     
     //conditional to check input value
-    if (inputValue.length != 0) {   
-        var filteredData = tableData.filter(ufo => ufo.datetime === inputValue);
-        console.log(filteredData);
 
+    var filteredData = tableData.filter(ufo => ufo.datetime === inputValue);
+    console.log(filteredData);
+    if (filteredData.length != 0) { 
         //create an array of filtered UFO sightings
         filteredData.forEach(function(filteredUFO) {
             var tbody = d3.select("tbody");

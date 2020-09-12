@@ -48,6 +48,8 @@ function runEnter() {
     var filteredData = tableData.filter(ufo => ufo.datetime === inputValue);
     console.log(filteredData);
 
+    //conditional to check input value
+    if (filteredData.length != 0) { 
     //clear current table
     ufoTable.html("");
     //create an array of filtered UFO sightings
@@ -61,4 +63,8 @@ function runEnter() {
             cell.text(value);
             });
         });
+    }
+    else {
+        alert("No results found!")
+    }
 }
