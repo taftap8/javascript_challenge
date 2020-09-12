@@ -49,12 +49,11 @@ function runEnter() {
 
     //get the value property
     var dateinputValue = dateinputElement.property("value");
-    console.log(dateinputValue);
     var cityinputValue = cityinputElement.property("value");
     var stateinputValue = stateinputElement.property("value");
     var countryinputValue = countryinputElement.property("value");
 
-    //check if filter exists
+    //check if filter exists & normalize text inputs
     if (dateinputValue) {
         filters["datetime"] = dateinputValue;
     }
@@ -72,7 +71,25 @@ function runEnter() {
     var tempData = tableData
     Object.entries(filters).forEach(function([key, value]){
         tempData = tempData.filter(row => row[key] === value)
-    })    // filter based on input values
+    })    
+    //create an array of filtered UFO sightings
+    tempData.forEach(function(filteredUFO) {
+        var tbody = d3.select("tbody");
+        console.log(filteredUFO);
+        var row = tbody.append("tr");
+        Object.entries(filteredUFO).forEach(function([key, value]) {
+            console.log(key, value);
+            var cell = row.append("td");
+            cell.text(value);
+        });
+    });
+    
+    }
+
+
+
+/// ORIGINAL CODE FOR FILTERING, DID NOT ACCEPT MULTIPLE INPUTS///
+    // filter based on input values
     // tempData = tempData.filter(ufo => ufo.datetime === dateinputValue);
     // console.log(tempData
     // tempData = tempData.filter(ufo => ufo.city === cityinputValue.toLowerCase());
@@ -85,20 +102,6 @@ function runEnter() {
     // console.log(tempData);
 
     //create an array of filtered UFO sightings
-
-    //create an array of filtered UFO sightings
-    tempData.forEach(function(filteredUFO) {
-        var tbody = d3.select("tbody");
-        console.log(filteredUFO);
-        var row = tbody.append("tr");
-        Object.entries(filteredUFO).forEach(function([key, value]) {
-            console.log(key, value);
-            var cell = row.append("td");
-            cell.text(value);
-        });
-    });
-
-}
 //             Object.entries(tempData).forEach(function ([key, value]) {
 //                 var tbody = d3.select("tbody");
 //                 //console.log(filteredUFO);
@@ -109,7 +112,6 @@ function runEnter() {
 //         });
 //     }
 // }
-
 // store the data in a list
 
 // loop through each parameter in the filter object
