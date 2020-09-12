@@ -24,14 +24,22 @@ tableData.forEach(function (UFOData) {
 //create event handlers
 button.on("click", runEnter);
 form.on("change", runEnter);
+
+
+
+
 //complete event handler for form completion
 function runEnter() {
+    //dictionaty to capture filters
+    var filters = {}
     //prevent page from refreshing
     d3.event.preventDefault();
     //select table
     var ufoTable = d3.select("tbody");
     //clear table
     ufoTable.html("");
+
+    
 
     //select input elements
     var dateinputElement = d3.select("#datetime");
@@ -41,46 +49,56 @@ function runEnter() {
 
     //get the value property
     var dateinputValue = dateinputElement.property("value");
+    console.log(dateinputValue);
     var cityinputValue = cityinputElement.property("value");
     var stateinputValue = stateinputElement.property("value");
     var countryinputValue = countryinputElement.property("value");
 
+    //check if filter exists
+    if (dateinputValue) {
+        filters["datetime"] = dateinputValue;
+    }
+    if (cityinputValue) {
+        filters["city"] = cityinputValue.toLowerCase();
+    }
+    if (stateinputValue) {
+        filters["state"] = stateinputValue.toLowerCase();
+    }
+    if (countryinputValue) {
+        filters["country"] = countryinputValue.toLowerCase();
+    }
+
     //copy table to filter based on inputs
     var tempData = tableData
-    console.log(tempData);
-    // filter based on input values
-    tempData = tableData.filter(ufo => ufo.datetime === dateinputValue);
-    console.log(tempData);
+    Object.entries(filters).forEach(function([key, value]){
+        tempData = tempData.filter(row => row[key] === value)
+    })    // filter based on input values
+    // tempData = tempData.filter(ufo => ufo.datetime === dateinputValue);
+    // console.log(tempData
+    // tempData = tempData.filter(ufo => ufo.city === cityinputValue.toLowerCase());
+    // console.log(tempData);
 
-    tempData = tableData.filter(ufo => ufo.city === cityinputValue.toLowerCase());
-    console.log(tempData);
+    // tempData = tempData.filter(ufo => ufo.state === stateinputValue.toLowerCase());
+    // console.log(tempData);
 
-    tempData = tableData.filter(ufo => ufo.state === stateinputValue.toLowerCase());
-    console.log(tempData);
-
-    tempData = tableData.filter(ufo => ufo.country === countryinputValue.toLowerCase());
-    console.log(tempData);
+    // tempData = tempData.filter(ufo => ufo.country === countryinputValue.toLowerCase());
+    // console.log(tempData);
 
     //create an array of filtered UFO sightings
-    if (tempData.length != 0) {
-        //create an array of filtered UFO sightings
-        ufoTable.html("");
-        tempData.forEach(function(filteredUFO) {
-            var tbody = d3.select("tbody");
-            console.log(filteredUFO);
-            var row = tbody.append("tr");
-            Object.entries(filteredUFO).forEach(function([key, value]) {
-                console.log(key, value);
-                var cell = row.append("td");
-                cell.text(value);
-            });
-        });
-    }
-    else {
-        alert("No results found!")
-    }
-}
 
+    //create an array of filtered UFO sightings
+    tempData.forEach(function(filteredUFO) {
+        var tbody = d3.select("tbody");
+        console.log(filteredUFO);
+        var row = tbody.append("tr");
+        Object.entries(filteredUFO).forEach(function([key, value]) {
+            console.log(key, value);
+            var cell = row.append("td");
+            cell.text(value);
+        });
+    });
+
+}
 //             Object.entries(tempData).forEach(function ([key, value]) {
 //                 var tbody = d3.select("tbody");
 //                 //console.log(filteredUFO);
