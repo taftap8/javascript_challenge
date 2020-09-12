@@ -46,7 +46,7 @@ function runEnter() {
     // capute any input value
     var dateFilterData = tableData.filter(ufo => ufo.datetime === dateinputValue);
     console.log(dateFilterData);
-    var cityFilterData = tableData.filter(ufo => ufo.city === cityinputValue);
+    var cityFilterData = tableData.filter(ufo => ufo.city === cityinputValue.toLowerCase());
     console.log(cityFilterData);
     var stateFilterData = tableData.filter(ufo => ufo.state === stateinputValue);
     console.log(stateFilterData);
