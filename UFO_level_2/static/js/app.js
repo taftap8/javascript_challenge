@@ -10,11 +10,11 @@ var form = d3.select("form");
 
 
 //print values to table
-tableData.forEach(function(UFOData) {
+tableData.forEach(function (UFOData) {
     var tbody = d3.select("tbody");
     console.log(UFOData);
     var row = tbody.append("tr");
-    Object.entries(UFOData).forEach(function([key, value]) {
+    Object.entries(UFOData).forEach(function ([key, value]) {
         console.log(key, value);
         var cell = row.append("td");
         cell.text(value);
@@ -23,11 +23,11 @@ tableData.forEach(function(UFOData) {
 
 //create event handlers
 button.on("click", runEnter);
-form.on("submit", runEnter);
+form.on("change", runEnter);
 //complete event handler for form completion
 function runEnter() {
     var ufoTable = d3.select("tbody");
-    
+
     //prevent page from refreshing
     d3.event.preventDefault();
 
@@ -43,24 +43,67 @@ function runEnter() {
     var stateinputValue = stateinputElement.property("value");
     var countryinputValue = countryinputElement.property("value");
 
-    //conditional to check input value
-    
-    var filteredData = tableData.filter(ufo => ufo.datetime === inputValue);
-    console.log(filteredData);
+    // capute any input value
+    var dateFilterData = tableData.filter(ufo => ufo.datetime === dateinputValue);
+    console.log(datafilteredData);
+    var cityFilterData = tableData.filter(ufo => ufo.city === cityinputValue);
+    console.log(cityfilteredData);
+    var stateFilterData = tableData.filter(ufo => ufo.state === stateinputValue);
+    console.log(statefilteredData);
+    var countryfilteredData = tableData.filter(ufo => ufo.country === countryinputValue);
+    console.log(countryfilteredData);
+    //console.log(filteredData);
 
-    //conditional to check input value
-    if (filteredData.length != 0) { 
-    //clear current table
-    ufoTable.html("");
-    //create an array of filtered UFO sightings
-    filteredData.forEach(function(filteredUFO) {
-        var tbody = d3.select("tbody");
-        console.log(filteredUFO);
-        var row = tbody.append("tr");
-        Object.entries(filteredUFO).forEach(function([key, value]) {
-            console.log(key, value);
-            var cell = row.append("td");
-            cell.text(value);
+    //variable to store any input
+    if (dateFilterData.length != 0) {
+        //create an array of filtered UFO sightings
+        datefilteredData.forEach(function (filteredUFO) {
+            var tbody = d3.select("tbody");
+            console.log(filteredUFO);
+            var row = tbody.append("tr");
+            Object.entries(filteredUFO).forEach(function ([key, value]) {
+                console.log(key, value);
+                var cell = row.append("td");
+                cell.text(value);
+            });
+        });
+    }
+    if (cityFilterData.length != 0) {
+        //create an array of filtered UFO sightings
+        cityfilteredData.forEach(function(filteredUFO) {
+            var tbody = d3.select("tbody");
+            console.log(filteredUFO);
+            var row = tbody.append("tr");
+            Object.entries(filteredUFO).forEach(function([key, value]) {
+                console.log(key, value);
+                var cell = row.append("td");
+                cell.text(value);
+            });
+        });
+    }
+    if (stateFilterData.length != 0) {
+        //create an array of filtered UFO sightings
+        statefilteredData.forEach(function(filteredUFO) {
+            var tbody = d3.select("tbody");
+            console.log(filteredUFO);
+            var row = tbody.append("tr");
+            Object.entries(filteredUFO).forEach(function([key, value]) {
+                console.log(key, value);
+                var cell = row.append("td");
+                cell.text(value);
+            });
+        });
+    }
+    if (countryFilterData.length != 0) {
+        //create an array of filtered UFO sightings
+        countryfilteredData.forEach(function(filteredUFO) {
+            var tbody = d3.select("tbody");
+            console.log(filteredUFO);
+            var row = tbody.append("tr");
+            Object.entries(filteredUFO).forEach(function([key, value]) {
+                console.log(key, value);
+                var cell = row.append("td");
+                cell.text(value);
             });
         });
     }
