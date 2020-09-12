@@ -48,9 +48,9 @@ function runEnter() {
     console.log(dateFilterData);
     var cityFilterData = tableData.filter(ufo => ufo.city === cityinputValue.toLowerCase());
     console.log(cityFilterData);
-    var stateFilterData = tableData.filter(ufo => ufo.state === stateinputValue);
+    var stateFilterData = tableData.filter(ufo => ufo.state === stateinputValue.toLowerCase());
     console.log(stateFilterData);
-    var countryFilterData = tableData.filter(ufo => ufo.country === countryinputValue);
+    var countryFilterData = tableData.filter(ufo => ufo.country === countryinputValue.toLowerCase());
     console.log(countryFilterData);
     //console.log(filteredData);
 
