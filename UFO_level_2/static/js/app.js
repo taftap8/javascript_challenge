@@ -43,77 +43,99 @@ function runEnter() {
     var stateinputValue = stateinputElement.property("value");
     var countryinputValue = countryinputElement.property("value");
 
+    //copy table to filter based on inputs
+    var tempData = tableData
     // capute any input value
-    var dateFilterData = tableData.filter(ufo => ufo.datetime === dateinputValue);
-    console.log(dateFilterData);
-    var cityFilterData = tableData.filter(ufo => ufo.city === cityinputValue.toLowerCase());
-    console.log(cityFilterData);
-    var stateFilterData = tableData.filter(ufo => ufo.state === stateinputValue.toLowerCase());
-    console.log(stateFilterData);
-    var countryFilterData = tableData.filter(ufo => ufo.country === countryinputValue.toLowerCase());
-    console.log(countryFilterData);
-    //console.log(filteredData);
+    tempData = tableData.filter(ufo => ufo.datetime === dateinputValue);
+    //console.log(dateFilterData);
+    //filters["Date"] = dateFilterData;
+    tempData = tableData.filter(ufo => ufo.city === cityinputValue.toLowerCase());
+    //console.log(cityFilterData);
+    //filters["City"] = cityFilterData;
+    tempData = tableData.filter(ufo => ufo.state === stateinputValue.toLowerCase());
+    //console.log(stateFilterData);
+    //filters["State"] = stateFilterData;
+    tempData = tableData.filter(ufo => ufo.country === countryinputValue.toLowerCase());
+    //console.log(countryFilterData);
+    //filtes["Country"] = countryFilterData;
+    ufoTable.html("");
+    //create an array of filtered UFO sightings
+    //filterData.forEach(function (filteredUFO) {
 
-    
-
-    //variable to store any input
-    if (dateFilterData.length != 0) {
-        ufoTable.html("");
-        //create an array of filtered UFO sightings
-        dateFilterData.forEach(function (filteredUFO) {
-            var tbody = d3.select("tbody");
-            console.log(filteredUFO);
+    Object.entries(filters).forEach(function ([key, value]) {
+        var tbody = d3.select("tbody");
+            //console.log(filteredUFO);
             var row = tbody.append("tr");
-            Object.entries(filteredUFO).forEach(function ([key, value]) {
-                console.log(key, value);
-                var cell = row.append("td");
-                cell.text(value);
-            });
-        });
-    }
-    else if (cityFilterData.length != 0) {
-        //create an array of filtered UFO sightings
-        ufoTable.html("");
-        cityFilterData.forEach(function(filteredUFO) {
-            var tbody = d3.select("tbody");
-            console.log(filteredUFO);
-            var row = tbody.append("tr");
-            Object.entries(filteredUFO).forEach(function([key, value]) {
-                console.log(key, value);
-                var cell = row.append("td");
-                cell.text(value);
-            });
-        });
-    }
-    else if (stateFilterData.length != 0) {
-        //create an array of filtered UFO sightings
-        ufoTable.html("");
-        stateFilterData.forEach(function(filteredUFO) {
-            var tbody = d3.select("tbody");
-            console.log(filteredUFO);
-            var row = tbody.append("tr");
-            Object.entries(filteredUFO).forEach(function([key, value]) {
-                console.log(key, value);
-                var cell = row.append("td");
-                cell.text(value);
-            });
-        });
-    }
-    else if (countryFilterData.length != 0) {
-        //create an array of filtered UFO sightings
-        ufoTable.html("");
-        countryFilterData.forEach(function(filteredUFO) {
-            var tbody = d3.select("tbody");
-            console.log(filteredUFO);
-            var row = tbody.append("tr");
-            Object.entries(filteredUFO).forEach(function([key, value]) {
-                console.log(key, value);
-                var cell = row.append("td");
-                cell.text(value);
-            });
-        });
-    }
-    else {
-        alert("No results found!")
-    }
+            console.log(key, value);
+            var cell = row.append("td");
+            cell.text(value);
+    });
 }
+
+// store the data in a list
+
+// loop through each parameter in the filter object
+
+// for each parameter compare the full list of data to make sure that it matches the filter parameter
+
+    // //variable to store any input
+    // if (dateFilterData.length != 0) {
+    //     ufoTable.html("");
+    //     //create an array of filtered UFO sightings
+    //     dateFilterData.forEach(function (filteredUFO) {
+    //         var tbody = d3.select("tbody");
+    //         console.log(filteredUFO);
+    //         var row = tbody.append("tr");
+    //         Object.entries(filteredUFO).forEach(function ([key, value]) {
+    //             console.log(key, value);
+    //             var cell = row.append("td");
+    //             cell.text(value);
+    //         });
+    //     });
+    // }
+    // else if (cityFilterData.length != 0) {
+    //     //create an array of filtered UFO sightings
+    //     ufoTable.html("");
+    //     cityFilterData.forEach(function(filteredUFO) {
+    //         var tbody = d3.select("tbody");
+    //         console.log(filteredUFO);
+    //         var row = tbody.append("tr");
+    //         Object.entries(filteredUFO).forEach(function([key, value]) {
+    //             console.log(key, value);
+    //             var cell = row.append("td");
+    //             cell.text(value);
+    //         });
+    //     });
+    // }
+    // else if (stateFilterData.length != 0) {
+    //     //create an array of filtered UFO sightings
+    //     ufoTable.html("");
+    //     stateFilterData.forEach(function(filteredUFO) {
+    //         var tbody = d3.select("tbody");
+    //         console.log(filteredUFO);
+    //         var row = tbody.append("tr");
+    //         Object.entries(filteredUFO).forEach(function([key, value]) {
+    //             console.log(key, value);
+    //             var cell = row.append("td");
+    //             cell.text(value);
+    //         });
+    //     });
+    // }
+    // else if (countryFilterData.length != 0) {
+    //     //create an array of filtered UFO sightings
+    //     ufoTable.html("");
+    //     countryFilterData.forEach(function(filteredUFO) {
+    //         var tbody = d3.select("tbody");
+    //         console.log(filteredUFO);
+    //         var row = tbody.append("tr");
+    //         Object.entries(filteredUFO).forEach(function([key, value]) {
+    //             console.log(key, value);
+    //             var cell = row.append("td");
+    //             cell.text(value);
+    //         });
+    //     });
+    // }
+    // else {
+    //     alert("No results found!")
+    // }
+//}
